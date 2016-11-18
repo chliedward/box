@@ -8,6 +8,14 @@
 //*
 //*-----------------
 //
+
+
+var USERNAME = "username";
+var PASSWORD = "password";
+var TOKEN = "token";
+var PREV_USER  = "PREV_USER";
+var PREV_TOKEN = "PREV_TOKEN";
+
 function getCachedUserInfo(){
     var p_user   = Cookies.get(PREV_USER);
     var p_token = Cookies.get(PREV_TOKEN);

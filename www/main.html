@@ -17,40 +17,19 @@
     <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="lib/fastclick.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="lib/js-cookie-master/src/js.cookie.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/my-api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/js-cookie-master/src/js.cookie.js"></script>
     <script type="text/javascript" charset="utf-8" src="lib/my-cookie_ops.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/my-draw-form.js"></script>
+
+    <!--<script type="text/javascript" charset="utf-8" src="lib/my-api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/my-draw-form.js"></script>-->
+    
+    <script type="text/javascript" charset="utf-8" src="lib/model.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/view.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/controller.js"></script>
     <script>
         $(document).ready(function(){
-            var test =  getCachedUserInfo();
-            if(test==null || test==undefined){
-                 window.location.href = LOGIN_PAGE;
-                return;
-            }
-            
-            tryVerifyUserAndTokenOnServer(test.username, test.token)
-                    .done(function(result){
-                        if(!result){
-                            window.location.href = LOGIN_PAGE;
-                        } 
-            });
-            
-            $("#logout").on("click", function(){
-                clearCachedUserInfo();
-                invalidateServerToken();
-                window.location.href = LOGIN_PAGE;
-            });
-            
-            $('#mainlist').html(genHtmlListForBoxes(FAKE_BOX_LIST));
-            
-            mainOperation();
+            box.controller.main.init();
         });
-        
-        
-        function mainOperation(){
-            
-        }
     </script>
 </head>
 

@@ -18,115 +18,17 @@
     <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="lib/js-cookie-master/src/js.cookie.js"></script>
         
-        
-    <script type="text/javascript" charset="utf-8" src="lib/my-api.js"></script>
-    <script type="text/javascript" charset="utf-8" src="lib/my-cookie_ops.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/my-cookie_ops.js"></script>    
+    <!--<script type="text/javascript" charset="utf-8" src="lib/my-api.js"></script>-->
+
+    <script type="text/javascript" charset="utf-8" src="lib/model.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/view.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/controller.js"></script>
+
     <script>
         $(document).ready(function(){
-
-            $("#main").bind("panelbeforeload", startApp);
-            // setup signin and signup button events
-            
-            //Cookies.set("test","click");
-            
-            var test =  getCachedUserInfo();
-            if(test!=null){
-                tryVerifyUserAndTokenOnServer(test.username, test.token)
-                    .done(function(result){
-                        if(result){
-                            window.location.href = MAIN_PAGE;
-                        } 
-                });
-            }
-            // the login button
-            $("#login").on("click", function(){
-                signIn();
-            });
-            $('body').on('keypress', 'input', function(args) {
-                if (args.keyCode == 13) {
-                    $("#login").click();
-                    return false;
-                }
-            });
-            //$("#register").on("click", function(){
-            //    signUp();
-            //});
-
+            box.controller.login.init()
         });
-
-        function signIn(){
-            // SIGNIN SERVER CALL CODE GOES HERE
-            var user=$("#username").val();
-            var password = $("#password").val();
-            
-            getLoginToken(user,password).then(function(token){
-                if(token!=null){ // server answer 
-                    setCachedUserInfo(user,token);
-                    window.location.href = "main.html";
-                    //$.afui.loadContent("#main", null, null, "fade");
-                }
-                else
-                {
-                    //Example use of the error toast api
-                    clearCachedUserInfo();
-                    var opts={
-                        message:"Invalid Login Combination",
-                        position:"tc",
-                        delay:2000,
-                        autoClose:true,
-                        type:"error"
-                    };
-                    $.afui.toast(opts);
-                }    
-            });
-            
-        }
-
-        function signUp(){
-            //TODO
-
-            //example client side validation
-            if ($("#password").val() === $("#confirmpassword").val())
-            {
-                // SIGNUP SERVER CALL CODE GOES HERE
-
-                //render main view
-                $.afui.loadContent("#main", null, null, "fade");
-
-                //Example use of the success toast
-                var opts={
-                    message:"Account Created",
-                    position:"tc",
-                    delay:2000,
-                    autoClose:true,
-                    type:"success"
-                };
-                $.afui.toast(opts);
-
-            }
-            else
-            {
-                //Example use of the error toast
-                var opts={
-                    message:"Passwords Don't Match",
-                    position:"tc",
-                    delay:2000,
-                    autoClose:true,
-                    type:"error"
-                };
-                $.afui.toast(opts);
-            }
-
-
-        }
-
-        function startApp(){
-            // clears all back button history
-            $.afui.clearHistory();
-
-            // your app code here
-        }
-
     </script>
 
 </head>
