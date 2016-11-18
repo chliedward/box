@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+<head>
+
+    <title>App Framework Kitchen Sink</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="stylesheet" type="text/css" href="lib/appframework/icons.css" />
+    <link rel="stylesheet" type="text/css" href="lib/appframework/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="lib/my-css-main.css"/>
+    <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/fastclick.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="lib/js-cookie-master/src/js.cookie.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/my-api.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/my-cookie_ops.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/my-draw-form.js"></script>
+    <script>
+        $(document).ready(function(){
+            var test =  getCachedUserInfo();
+            if(test==null || test==undefined){
+                 window.location.href = LOGIN_PAGE;
+                return;
+            }
+            
+            tryVerifyUserAndTokenOnServer(test.username, test.token)
+                    .done(function(result){
+                        if(!result){
+                            window.location.href = LOGIN_PAGE;
+                        } 
+            });
+            
+            $("#logout").on("click", function(){
+                clearCachedUserInfo();
+                invalidateServerToken();
+                window.location.href = LOGIN_PAGE;
+            });
+            
+            $('#mainlist').html(genHtmlListForBoxes(FAKE_BOX_LIST));
+            
+            mainOperation();
+        });
+        
+        
+        function mainOperation(){
+            
+        }
+    </script>
+</head>
+
+<body>
+    <div id="splashscreen" class='ui-loader heavy'>
+        App Framework
+        <br>
+        <br>
+        <span class='ui-icon ui-icon-loading spin'></span>
+        <h1>Starting app</h1>
+    </div>
+
+    <div class="view splitview">
+        
+        <header>
+            <a class="menuButton" data-left-menu="left" data-transition="cover" style="float:left"></a>
+            <h1>Title</h1>
+        </header>
+        
+        <div class="pages">
+            <div class="panel" id="main" data-title="Box Control" data-selected="true">
+                // TODO: make to following list more good looking;
+                <ul class="list" id="mainlist">
+                    <li><a href="" onclick="$.afui.clearHistory()">Box1</a></li>
+                    <li><a href="" onclick="$.afui.clearHistory()">Box2</a></li>
+                </ul>
+            </div>
+            <div class="panel" id="page2" data-title="Page 2">
+                This is Page 2
+            </div>
+        </div>
+
+        <nav id="left">
+            <div class="view active">
+                <header>
+                    <h1>Operation</h1>
+                </header>
+                <div class="pages">
+                    <div class="panel active" id="navPage1" data-title="Foobar">
+                        <ul class="list">
+                            <li><a href="#main" onclick="$.afui.clearHistory()">Box Control</a></li>
+                            <li><a href="#page2" onclick="$.afui.clearHistory()">Special Operations</a></li>
+                            <li><a href="" onclick="$.afui.clearHistory()" id = "logout">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+</body>
+
+</html>

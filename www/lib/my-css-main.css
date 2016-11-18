@@ -1,0 +1,7 @@
+.list li a:after{
+content: "" !important;
+}
+
+#mainlist  li a:before{ 
+content: "" !important;
+}
