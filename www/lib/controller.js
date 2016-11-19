@@ -110,5 +110,30 @@ var LOGIN_PAGE= "index.html";
             })
         }
     }
+    //"online": true,
+    //"udid": <device UDID>,
+    //"name": "<device name>",
+    //"is_owner": true/false,
+    //"is_user": true/false,
+    //"locked": true/false,
+    //"opened": true/false
+    
+    box.view.main.list.render =  function(bomObj, boxjsonlist){
+        var htmlString="";
+        for(var i=0; i < boxjsonlist.length; i++){
+            var box   = boxjsonlist[i];   
+            
+            var boxId = box.udid;
+            var boxNm = box.name;
+
+            var htmlStringLine = '<li data-brackets-id=""><a data-brackets-id="293" href="#detail" onclick="$.afui.clearHistory()">';
+            var num = i+1;
+            num = "" + num;
+            htmlStringLine = htmlStringLine+ num+". "+ boxNm+'</a></li>';
+
+            htmlString+=htmlStringLine;
+        }
+        bomObj.html(htmlString);
+    };
 })()
     
