@@ -10,6 +10,12 @@
     box.view.main = box.view.main || {};
     box.view.bind = box.view.bind || {};
 
+    box.view.main = {
+        goto: function() {
+            $('#main').trigger('click');
+        }
+    }
+    
     box.view.main.list = {
         render: function(container, boxjsonlist){
             container.html(this.genHtmlListForBoxes(boxjsonlist));
@@ -35,11 +41,11 @@
     
     box.view.bind = {
         getBoxId: function() {
-            return $('#boxId').val();
+            return $('input[name=boxId]').val();
         },
         
         getVerifyCode: function() {
-            return $('#verifyCode').val();
+            return $('input[name=verifyCode]').val();
         },
         
         gotoPage2VerifyCode: function() {

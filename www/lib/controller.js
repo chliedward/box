@@ -125,35 +125,27 @@ var LOGIN_PAGE= "index.html";
                         if(res.success==true && res.info=="Verification code sent") {
                             box.view.bind.gotoPage2VerifyCode();
                         } else {
-                            clearCachedUserInfo();
-                            var opts={
-                            message:res.info,
-                            position:"tc",
-                            delay:2000,
-                            autoClose:true,
-                            type:"error"
-                            };
-                            $.afui.toast(opts);
+                            box.view.message.error(res.info);
                         }
                     }, function(res) {
-                            console.log(res);
-                            clearCachedUserInfo();
-                            var opts={
-                            message:res.info,
-                            position:"tc",
-                            delay:2000,
-                            autoClose:true,
-                            type:"error"
-                            };
-                            $.afui.toast(opts);
+                            box.view.message.error(res.info);
                     })
             });
             
             $('#page2ConfirmVerify').on('click', function() {
                 boxId=box.view.bind.getBoxId();
                 verifyCode=box.view.bind.getVerifyCode();
-                box.model.bindDevice(boxId, verifyCode);
+                box.model.bindDevice(boxId, verifyCode)
+                    .then(function(res) {
+                    if(res.success==true) {
+                        box.view.message.info(res.info);
+                        box.view.main.goto();
+                    }
+                }, function(res) {
+                    box.view.message.error(res.info);
+                })
             });
+            
         }
     }
     

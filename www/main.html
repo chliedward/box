@@ -61,7 +61,7 @@
                         <input type="text" name="boxId"/>
                     </div>
                     <a href="#" id="page2SendVerifyCode">Send Verify Code</a>
-                    <a href="#page2VerifyCode" id="gotoPage2SendVerifyCode" style="display: none;"></a>
+                    <a href="#page2VerifyCode" id="gotoPage2VerifyCode" style="display: none;"></a>
                 </div>
             </div>
             <div class="panel" id="page2VerifyCode" data-title="Page 2 - Verify Code">
@@ -87,7 +87,7 @@
                 <div class="pages">
                     <div class="panel active" id="navPage1" data-title="Foobar">
                         <ul class="list">
-                            <li><a href="#main" onclick="$.afui.clearHistory()">Box Control</a></li>
+                            <li><a id="main" href="#main" onclick="$.afui.clearHistory()">Box Control</a></li>
                             <li><a href="#page2" onclick="$.afui.clearHistory()">Special Operations</a></li>
                             <li><a href="#map-panel" onclick="$.afui.clearHistory()">Map</a></li>
                             <li><a href="" onclick="$.afui.clearHistory()" id = "logout">Logout</a></li>
