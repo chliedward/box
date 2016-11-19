@@ -22,11 +22,14 @@
             deferred.resolve(res) 
         })
         .fail(function(jqxhr, statusCode, err) {
-            if(jqxhr.status == 401){
-                location = "index.html";
-            }
+           
             var res = JSON.parse(jqxhr.responseText);
             deferred.reject(res); 
+            if(jqxhr.status == 401){
+                setTimeout(function(){
+                    location = "index.html";
+                },500)
+            }
         });
 
         return deferred.promise();
