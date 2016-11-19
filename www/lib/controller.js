@@ -7,7 +7,9 @@ var LOGIN_PAGE= "index.html";
 (function(){
     window.box = window.box || {};
     box.controller = box.controller || {};
-
+    box.model.bindDevice(112233,100000).then((res) => {
+        console.log(res);
+    })
     box.controller.login = {
         init: function () {
         $("#main").bind("panelbeforeload", this.startApp);   
@@ -27,7 +29,7 @@ var LOGIN_PAGE= "index.html";
             var user=$("#username").val();
             var password = $("#password").val();
             
-            box.model.getLoginToken(user,password).then(function(res){
+            box.model.getLoginToken(user, password).then(function(res){
                 let token = res.token;
                 if(token!=null){ // server answer 
                     setCachedUserInfo(user,token);
@@ -104,7 +106,6 @@ var LOGIN_PAGE= "index.html";
                 var arr = Object.keys(res).map((key) => {
                     return res[key];
                 }) 
-                
                 box.view.main.list.render($('#mainlist'), arr);
             })
         }

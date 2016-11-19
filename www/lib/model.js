@@ -25,6 +25,8 @@
             if(jqxhr.status == 401){
                 location = "index.html";
             }
+            var res = JSON.parse(jqxhr.responseText);
+            console.log(res);
             deferred.reject(err); 
         });
 
@@ -33,16 +35,33 @@
 
     box.model = {
         getLoginToken:(username, password) => {
-            const data = {
+            var data = {
                 username:username,
                 password:password,
             }
-
             return ajax('/sessions', 'POST', data);
         },
         queryAllBoxStatus: () => {
             return ajax('/devices', 'GET');
         },
+        /*
+            udid: device id
+            vcode: verify id
+        */
+        bindDevice: (udid, vcode) => {
+            const data = {
+                vcode:vcode,
+            }
+
+            return ajax('/devices/'+udid, 'put', data);
+        },
+        /*
+            udid: device id
+            data: no
+        */
+        unbindDevice: (udid) => {
+            return ajax('/devices/'+udid, 'delete');
+        },
     }
 })()
-    
+
