@@ -7,9 +7,10 @@ var LOGIN_PAGE= "index.html";
 (function(){
     window.box = window.box || {};
     box.controller = box.controller || {};
-    box.model.bindDevice(112233,100000).then((res) => {
-        console.log(res);
-    })
+    // box.model.bindDevice(654321,100000).then((res) => {
+    //     console.log(res);
+    // })
+    
     box.controller.login = {
         init: function () {
         $("#main").bind("panelbeforeload", this.startApp);   
@@ -34,7 +35,6 @@ var LOGIN_PAGE= "index.html";
                 if(token!=null){ // server answer 
                     setCachedUserInfo(user,token);
                     window.location.href = "main.html";
-                    //$.afui.loadContent("#main", null, null, "fade");
                 }
                 else
                 {
@@ -53,8 +53,6 @@ var LOGIN_PAGE= "index.html";
             
         },
         signUp: function(){
-            //TODO
-            //example client side validation
             if ($("#password").val() === $("#confirmpassword").val())
             {
                 // SIGNUP SERVER CALL CODE GOES HERE
@@ -105,7 +103,7 @@ var LOGIN_PAGE= "index.html";
             box.model.queryAllBoxStatus().then((res) => {
                 var arr = Object.keys(res).map((key) => {
                     return res[key];
-                }) 
+                });
                 box.view.main.list.render($('#mainlist'), arr);
             })
         }

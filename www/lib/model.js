@@ -62,6 +62,16 @@
         unbindDevice: (udid) => {
             return ajax('/devices/'+udid, 'delete');
         },
+        /*
+            udid: device id
+            data: no
+        */
+        lockDevice: (udid) => {
+            return ajax('/devices/'+udid, 'lock');
+        },
+        unlockDevice: (udid) => {
+            return ajax('/devices/'+udid, 'unlock');
+        }
     }
 })()
 
