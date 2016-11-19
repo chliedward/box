@@ -12,7 +12,7 @@
 
     box.view.main = {
         goto: function() {
-            $('#main').trigger('click');
+            $('#gotoMain').trigger('click');
         }
     }
     
