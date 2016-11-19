@@ -1,7 +1,27 @@
 .list li a:after{
 content: "" !important;
 }
+/*
+// #mainlist  li a:before{ 
+// content: "" !important;
+// }*/
 
-#mainlist  li a:before{ 
-content: "" !important;
+.lock {
+    width: 23px;
+    height: 22px;
+    background-size:23px !important;
+    background: url(icon/locked.svg) 0 0;    
+}
+
+.unlock {
+    width: 23px;
+    height: 22px;
+    background-size:23px !important;
+    background: url(icon/unlocked.svg) 0 0;    
+}
+.opened {
+    width: 23px;
+    height: 22px;
+    background-size:23px !important;
+    background: url(icon/) 0 0;    
 }
