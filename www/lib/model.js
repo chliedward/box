@@ -46,6 +46,12 @@
         },
         /*
             udid: device id
+        */
+        getVerifyCode: (udid) => {
+            return ajax('/devices/'+udid, 'put');
+        },
+        /*
+            udid: device id
             vcode: verify id
         */
         bindDevice: (udid, vcode) => {
@@ -69,7 +75,7 @@
         lockDevice: (udid) => {
             return ajax('/devices/'+udid, 'lock');
         },
-        unlockDevice: (udid) => {
+        lockDevice: (udid) => {
             return ajax('/devices/'+udid, 'unlock');
         }
     }
