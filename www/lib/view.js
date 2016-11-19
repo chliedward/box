@@ -39,7 +39,7 @@
         }
     }
     
-    box.view.bind = {
+    box.view.bind = {        
         getBoxId: function() {
             return $('input[name=boxId]').val();
         },

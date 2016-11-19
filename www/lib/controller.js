@@ -115,16 +115,20 @@ var LOGIN_PAGE= "index.html";
         init: function() {
             $('#page2SendVerifyCode').on('click',function() {
                 boxId=box.view.bind.getBoxId();
-                box.model.getVerifyCode(boxId)
-                    .then(function(res){
-                        if(res.success==true && res.info=="Verification code sent") {
-                            box.view.bind.gotoPage2VerifyCode();
-                        } else {
-                            box.view.message.error(res.info);
-                        }
-                    }, function(res) {
-                            box.view.message.error(res.info);
-                    })
+                if(boxId==="") {
+                    box.view.message.error("Please input box id");
+                } else {
+                    box.model.getVerifyCode(boxId)
+                        .then(function(res){
+                            if(res.success==true && res.info=="Verification code sent") {
+                                box.view.bind.gotoPage2VerifyCode();
+                            } else {
+                                box.view.message.error(res.info);
+                            }
+                        }, function(res) {
+                                box.view.message.error(res.info);
+                        })    
+                }
             });
             
             $('#page2ConfirmVerify').on('click', function() {
