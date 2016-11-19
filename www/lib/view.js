@@ -8,6 +8,7 @@
     window.box = window.box || {}; 
     box.view = box.view || {};
     box.view.main = box.view.main || {};
+    box.view.bind = box.view.bind || {};
 
     box.view.main.list = {
         render: function(container, boxjsonlist){
@@ -31,5 +32,20 @@
             return htmlString;
         }
     }
+    
+    box.view.bind = {
+        getBoxId: function() {
+            return $('#boxId').val();
+        },
+        
+        getVerifyCode: function() {
+            return $('#verifyCode').val();
+        },
+        
+        gotoPage2VerifyCode: function() {
+            $('#gotoPage2VerifyCode').trigger('click');  
+        },
+    }
+    
 })()
     

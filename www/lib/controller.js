@@ -118,6 +118,38 @@ var LOGIN_PAGE= "index.html";
     //"locked": true/false,
     //"opened": true/false
     
+    
+    box.controller.bind = {
+        init: function() {
+            $('#page2SendVerifyCode').on('click',function() {
+                boxId=box.view.bind.getBoxId();
+                box.model.getVerifyCode(boxId)
+                    .then(function(res){
+                        if(res.success==true && res.info=="Verification code sent") {
+                            box.view.bind.gotoPage2VerifyCode();
+                        } else {
+                            clearCachedUserInfo();
+                            var opts={
+                            message:res.info,
+                            position:"tc",
+                            delay:2000,
+                            autoClose:true,
+                            type:"error"
+                            };
+                            $.afui.toast(opts);
+                        }
+                    })
+            });
+            
+            $('#page2ConfirmVerify').on('click', function() {
+                boxId=box.view.bind.getBoxId();
+                verifyCode=box.view.bind.getVerifyCode();
+                box.model.bindDevice(boxId, verifyCode);
+            });
+        }
+    }
+    
+    
     box.view.main.list.render =  function(bomObj, boxjsonlist){
         var htmlString="";
         for(var i=0; i < boxjsonlist.length; i++){

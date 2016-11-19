@@ -29,6 +29,7 @@
     <script>
         $(document).ready(function(){
             box.controller.main.init();
+            box.controller.bind.init();
         });
     </script>
 </head>
@@ -58,7 +59,29 @@
                 </ul>
             </div>
             <div class="panel" id="page2" data-title="Page 2">
-                This is Page 2
+                <ul class="list" id="page2List">
+                    <li><a href="#page2BindNewBox" onClick="$.afui.clearHistory()">Bind new box</a></li>
+                </ul>
+            </div>
+            <div class="panel" id="page2BindNewBox" data-title="Page 2 - Bind New Box">
+                <div class="form">
+                    <div>
+                        <label>Box Id</label>
+                        <input type="text" name="boxId"/>
+                    </div>
+                    <a href="#" id="page2SendVerifyCode">Send Verify Code</a>
+                    <a href="#page2VerifyCode" id="gotoPage2SendVerifyCode" style="display: none;"></a>
+                </div>
+            </div>
+            <div class="panel" id="page2VerifyCode" data-title="Page 2 - Verify Code">
+                <div class="form">
+                    <div>
+                        <label>Verify Code</label>
+                        <input type="text" name="verifyCode" />
+                    </div>
+                    <a href="#" id="page2ConfirmVerify">Verify</a>
+                    <a href="#page2BindNewBox">Back</a>
+                </div>
             </div>
         </div>
 
