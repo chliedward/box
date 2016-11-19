@@ -149,7 +149,8 @@ var LOGIN_PAGE= "index.html";
                 verifyCode=box.view.bind.getVerifyCode();
                 box.model.bindDevice(boxId, verifyCode);
             });
-
+        }
+    }
     box.view.message ={
         error :  function(string){
             var opts={
