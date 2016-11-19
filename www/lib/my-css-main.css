@@ -7,21 +7,34 @@ content: "" !important;
 // }*/
 
 .lock {
-    width: 23px;
-    height: 22px;
-    background-size:23px !important;
+    width: 27px;
+    height: 25px;
+    background-size:27px !important;
     background: url(icon/locked.svg) 0 0;    
 }
 
 .unlock {
-    width: 23px;
-    height: 22px;
-    background-size:23px !important;
+    width: 27px;
+    height: 25px;
+    background-size:27px !important;
     background: url(icon/unlocked.svg) 0 0;    
 }
-.opened {
-    width: 23px;
-    height: 22px;
-    background-size:23px !important;
-    background: url(icon/) 0 0;    
+.open {
+    width: 27px;
+    height: 25px;
+    background-size:27px !important;
+    background: url(icon/open.png) 0 0;    
+}
+.closed {
+    width: 27px;
+    height: 25px;
+    background-size:27px !important;
+    background: url(icon/close.png) 0 0;    
+}
+
+.isOnline {
+    width: 27px;
+    height: 25px;
+    background-size:27px !important;
+    background: url(icon/images.jpg) 0 0;    
 }

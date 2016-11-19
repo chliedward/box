@@ -77,7 +77,7 @@
         lockDevice: (udid) => {
             return ajax('/devices/'+udid, 'lock');
         },
-        lockDevice: (udid) => {
+        unLockDevice: (udid) => {
             return ajax('/devices/'+udid, 'unlock');
         }
     }

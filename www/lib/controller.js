@@ -26,7 +26,7 @@ var LOGIN_PAGE= "index.html";
             // SIGNIN SERVER CALL CODE GOES HERE
             var user=$("#username").val();
             var password = $("#password").val();
-            
+            box.view.message.info("Access to Server...");
             box.model.getLoginToken(user, password).then(function(res){
                 let token = res.token;
                 if(token!=null){ // server answer 
@@ -100,6 +100,39 @@ var LOGIN_PAGE= "index.html";
             })
             
             box.view.main.map.render('map-panel');
+        }
+    }
+    
+    box.controller.set= {
+        lock: function(boxid){
+            box.model.lockDevice(boxid).done( function(res){
+                if( res.success == true){
+                    box.view.message.info("lock device success!");
+                    box.model.queryAllBoxStatus().then((res) => {
+                        var arr = Object.keys(res).map((key) => {
+                            return res[key];
+                        });
+                        box.view.main.list.render($('#mainlist'), arr);
+                    });
+                };
+            } ).fail( function(res){
+                var x=res;
+            } );
+        },
+        unlock: function(boxid){
+            box.model.unLockDevice(boxid).done( function(res){
+                if( res.success == true){
+                    box.view.message.info("unlock device success!");
+                    box.model.queryAllBoxStatus().then((res) => {
+                        var arr = Object.keys(res).map((key) => {
+                            return res[key];
+                        });
+                        box.view.main.list.render($('#mainlist'), arr);
+                    });
+                };
+            } ).fail( function(res){
+                var x=res;
+            } );
         }
     }
     //"online": true,
@@ -191,10 +224,10 @@ var LOGIN_PAGE= "index.html";
             var locked = box.locked;
             var opened = box.opened;
             var htmlStringLine = '<li id="'+boxId+'">';
-            htmlStringLine += '<div class="lock"   style="display:inline-block"></div>';
+            htmlStringLine += '<div class="lock" style="display:inline-block"></div>';
             htmlStringLine += '<div class="unlock" style="display:inline-block"></div>';
             htmlStringLine += '<a data-brackets-id="293" href="" onclick="$.afui.clearHistory()" style="display:inline-block">';
-            htmlStringLine += '<div class="opened" style="display:inline-block"></div>';
+            htmlStringLine += '<div class="open" style="display:inline-block"></div>';
             htmlStringLine += '<div class="closed" style="display:inline-block"></div>';
             htmlStringLine += boxNm;
             htmlStringLine +='</a></li>';
@@ -202,22 +235,35 @@ var LOGIN_PAGE= "index.html";
             htmlString+=htmlStringLine;
         }
         bomObj.html(htmlString);
-        
         for(var i=0; i < boxjsonlist.length; i++){
             var box   = boxjsonlist[i];   
             var boxId = box.udid;
             var boxNm = box.name;
             var locked = box.locked;
             var opened = box.opened;
+            $('#'+boxId +" .lock").on('click',function(obj){
+                boxId=$(this).parent().attr('id');
+                window.box.controller.set.unlock(boxId);
+            });
+            $('#'+boxId +" .unlock").on('click',function(obj){
+                boxId=$(this).parent().attr('id');
+                window.box.controller.set.lock(boxId);
+            });
             if(locked){ 
                 $('#'+boxId +" .lock").show();
                 $('#'+boxId +" .unlock").hide();
-            }if(!locked){ 
+            }else{ 
                 $('#'+boxId +" .lock").hide();
                 $('#'+boxId +" .unlock").show();
             }
+            if(opened){ 
+                $('#'+boxId +" .open").css("display","inline-block");
+                $('#'+boxId +" .closed").css("display","none");
+            }else{
+                $('#'+boxId +" .open").css("display","none");
+                $('#'+boxId +" .closed").css("display","inline-block");
+            }
         }
-        
     };
 })()
     
