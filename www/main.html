@@ -52,6 +52,9 @@
             <div class="panel" id="page2" data-title="Page 2">
                 This is Page 2
             </div>
+            <div class="panel" id="map-panel" data-title="Map">
+                
+            </div>
         </div>
 
         <nav id="left">
@@ -64,6 +67,7 @@
                         <ul class="list">
                             <li><a href="#main" onclick="$.afui.clearHistory()">Box Control</a></li>
                             <li><a href="#page2" onclick="$.afui.clearHistory()">Special Operations</a></li>
+                            <li><a href="#map-panel" onclick="$.afui.clearHistory()">Map</a></li>
                             <li><a href="" onclick="$.afui.clearHistory()" id = "logout">Logout</a></li>
                         </ul>
                     </div>
@@ -73,6 +77,8 @@
 
     </div>
 </body>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Odfdxs84yLm34i9qtFq4DXKVuX1fyUH3">
+</script>
 <script type="text/javascript" charset="utf-8" src="lib/model.js"></script>
 <script type="text/javascript" charset="utf-8" src="lib/view.js"></script>
 <script type="text/javascript" charset="utf-8" src="lib/controller.js"></script>
