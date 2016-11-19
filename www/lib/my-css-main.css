@@ -19,3 +19,9 @@ content: "" !important;
     background-size:23px !important;
     background: url(icon/unlocked.svg) 0 0;    
 }
+.opened {
+    width: 23px;
+    height: 22px;
+    background-size:23px !important;
+    background: url(icon/) 0 0;    
+}
