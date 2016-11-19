@@ -7,9 +7,7 @@ var LOGIN_PAGE= "index.html";
 (function(){
     window.box = window.box || {};
     box.controller = box.controller || {};
-    box.model.bindDevice(112233,100000).then((res) => {
-        console.log(res);
-    })
+    
     box.controller.login = {
         init: function () {
         $("#main").bind("panelbeforeload", this.startApp);   
@@ -126,10 +124,10 @@ var LOGIN_PAGE= "index.html";
             var boxId = box.udid;
             var boxNm = box.name;
 
-            var htmlStringLine = '<li data-brackets-id=""><a data-brackets-id="293" href="#detail" onclick="$.afui.clearHistory()">';
-            var num = i+1;
-            num = "" + num;
-            htmlStringLine = htmlStringLine+ num+". "+ boxNm+'</a></li>';
+            var htmlStringLine = 
+                '<li data-brackets-id=""><div class="lock" style="display:inline-block"></div><div class="unlock" style="display:inline-block"></div><a data-brackets-id="293" href="" onclick="$.afui.clearHistory()" style="display:inline-block">';
+            
+            htmlStringLine = htmlStringLine+ boxNm+'</a></li>';
 
             htmlString+=htmlStringLine;
         }
