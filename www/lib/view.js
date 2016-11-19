@@ -10,12 +10,6 @@
     box.view.main = box.view.main || {};
     box.view.bind = box.view.bind || {};
 
-    box.view.main = {
-        goto: function() {
-            $('#gotoMain').trigger('click');
-        }
-    }
-    
     box.view.main.list = {
         render: function(container, boxjsonlist){
             container.html(this.genHtmlListForBoxes(boxjsonlist));
@@ -36,10 +30,23 @@
                 htmlString+=htmlStringLine;
             }
             return htmlString;
+        },
+        goto: function() {
+            $('#gotoMain').trigger('click');
         }
     }
     
-    box.view.bind = {        
+    box.view.bind = { 
+        bindNewBoxParent: null,
+        verifyCodeParent: null,
+        
+        init: function(bindNewBoxParent, verifyCodeParent, handlers) {
+            this.bindNewBoxParent=bindNewBoxParent;
+            this.verifyCodeParent=verifyCodeParent;
+            this.bindNewBoxParent.find('#page2SendVerifyCode').on('click', handlers.sendVerifyCode);
+            this.verifyCodeParent.find('#page2ConfirmVerify').on('click',handlers.confirmVerify);
+        },
+        
         getBoxId: function() {
             return $('input[name=boxId]').val();
         },

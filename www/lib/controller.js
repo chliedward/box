@@ -112,39 +112,49 @@ var LOGIN_PAGE= "index.html";
     
     
     box.controller.bind = {
-        init: function() {
-            $('#page2SendVerifyCode').on('click',function() {
-                boxId=box.view.bind.getBoxId();
-                if(boxId==="") {
-                    box.view.message.error("Please input box id");
-                } else {
-                    box.model.getVerifyCode(boxId)
-                        .then(function(res){
-                            if(res.success==true && res.info=="Verification code sent") {
-                                box.view.bind.gotoPage2VerifyCode();
-                            } else {
-                                box.view.message.error(res.info);
-                            }
-                        }, function(res) {
-                                box.view.message.error(res.info);
-                        })    
-                }
-            });
-            
-            $('#page2ConfirmVerify').on('click', function() {
-                boxId=box.view.bind.getBoxId();
-                verifyCode=box.view.bind.getVerifyCode();
+        sendVerifyCode: function() {
+            boxId=box.view.bind.getBoxId();
+            if(boxId==="") {
+                box.view.message.error("Please input box id");
+            } else {
+                box.model.getVerifyCode(boxId)
+                    .then(function(res){
+                        if(res.success==true && res.info=="Verification code sent") {
+                            box.view.bind.gotoPage2VerifyCode();
+                        } else {
+                            box.view.message.error(res.info);
+                        }
+                    }, function(res) {
+                            box.view.message.error(res.info);
+                    })    
+            }
+        },
+        
+        confirmVerify: function() {
+            boxId=box.view.bind.getBoxId();
+            verifyCode=box.view.bind.getVerifyCode();
+            if(boxId==="") {
+                box.view.message.error("Please input box id");
+            } else if(verifyCode==="") {
+                box.view.message.error("Please input verify code");
+            } else {
                 box.model.bindDevice(boxId, verifyCode)
                     .then(function(res) {
                     if(res.success==true) {
                         box.view.message.info(res.info);
-                        box.view.main.goto();
+                        box.controller.main.init();
+                        box.view.main.list.goto();
                     }
                 }, function(res) {
                     box.view.message.error(res.info);
                 })
-            });
-            
+            }
+       
+        },
+        
+        init: function() {
+            box.view.bind.init($('#page2BindNewBox'),$('#page2VerifyCode'),
+                               {sendVerifyCode: this.sendVerifyCode, confirmVerify: this.confirmVerify});
         }
     }
     box.view.message ={
