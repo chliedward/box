@@ -7,13 +7,10 @@ var LOGIN_PAGE= "index.html";
 (function(){
     window.box = window.box || {};
     box.controller = box.controller || {};
-    // box.model.bindDevice(654321,100000).then((res) => {
-    //     console.log(res);
-    // })
     
     box.controller.login = {
         init: function () {
-        $("#main").bind("panelbeforeload", this.startApp);   
+            $("#main").bind("panelbeforeload", this.startApp);   
             // the login button
             $("#login").on("click", () => {
                 this.signIn();
@@ -106,6 +103,8 @@ var LOGIN_PAGE= "index.html";
                 });
                 box.view.main.list.render($('#mainlist'), arr);
             })
+            
+            box.view.main.map.render('map-panel');
         }
     }
     //"online": true,

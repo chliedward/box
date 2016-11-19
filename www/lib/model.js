@@ -26,8 +26,7 @@
                 location = "index.html";
             }
             var res = JSON.parse(jqxhr.responseText);
-            console.log(res);
-            deferred.reject(err); 
+            deferred.reject(res); 
         });
 
         return deferred.promise();
